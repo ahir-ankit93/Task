@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+
+        <div ng-controller="myAppCtrl">
+                
+                    <h1 class="text-primary text-center"> Players Details </h1>
+            
+                <div>
+                        <form>
+                                <div class="input-group">
+                                  <input id="myInput" type="text" class="form-control" placeholder="Search">
+                                  <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                      <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                  </div>
+                                </div>
+                        </form>
+                </div>
+                <br>
+
+                <table class="table table-responsive table-bordered table-hover ">
+                    <tr>
+                        <th>Name</th>
+                        <th>Id</th>
+                        <th>Photo</th>
+                        <th>Runs</th>
+                        <th>Remove</th>
+                    </tr>
+                    <tbody id="myTable" >
+                    <tr ng-repeat="player in players">
+                        <td>{{player.name}}</td>
+                        <td>{{player.id}}</td>
+                        <td><img class="img-circle"ng-src="{{player.photo}}"/></td>
+                        <td>{{player.runs}}</td>
+                        <td ng-click="removePlayer(player)"><b>X</b></td>
+                    </tr>
+                    </tbody>
+            
+                </table>
+
+                <br>
+                <br>
+
+                
+
+                <div>       
+                    <form class="form-group" ng-submit="addPlayers()">
+                        
+                           
+                            <input type="text" class="form-control" ng-model="name" placeholder="name"/> <br>
+                            <input type="text" class="form-control" ng-model="id" placeholder="id"/> <br>
+                            <input type="text" class="form-control" ng-model="photo" placeholder="photo"/> <br>
+                            <input type="text" class="form-control" ng-model="runs" placeholder="runs"/> <br>
+                
+                            <input type="submit" value="submit" class="btn btn-success"/>
+                            
+                    </form>
+                </div>
+
+        </div>
+       
+       
+       
+
+    </div>
+   
+    <script src="js/angular.min.js"></script>
+    <script src="jquery/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="js/app.js"></script>
+
+    
+</body>
+</html>
